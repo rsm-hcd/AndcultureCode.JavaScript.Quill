@@ -42,6 +42,9 @@ const configPromise = new Promise(function(resolve, reject) {
             resolve: {
                 extensions: [".ts", ".js"],
             },
+            optimization: {
+                minimize: false,
+            },
         };
 
         // add the externals config to the webpack config

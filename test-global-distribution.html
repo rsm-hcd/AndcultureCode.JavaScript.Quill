@@ -7,6 +7,9 @@
             href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
             rel="stylesheet"
         />
+        <!--- Must reference peer dependencies here first since these are not included in wrapped global package -->
+        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+        <script src="https://unpkg.com/quill-blot-formatter@1.0.5/dist/quill-blot-formatter.min.js"></script>
     </head>
 
     <style>
@@ -34,10 +37,6 @@
     </style>
 
     <body>
-        <!--- Must reference peer dependencies here first since these are not included in wrapped global package -->
-        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
-        <script src="https://unpkg.com/quill-blot-formatter@1.0.5/dist/quill-blot-formatter.min.js"></script>
-
         <div id="app-container">
             <div id="quill-editor-container"></div>
         </div>
