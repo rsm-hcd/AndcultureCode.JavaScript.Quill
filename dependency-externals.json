@@ -4,13 +4,13 @@
             "commonjs": "quill",
             "commonjs2": "quill",
             "amd": "quill",
-            "var": "Quill"
+            "root": "Quill"
         },
         "quill-blot-formatter": {
             "commonjs": "quill-blot-formatter",
             "commonjs2": "quill-blot-formatter",
             "amd": "quill-blot-formatter",
-            "var": "QuillBlotFormatter"
+            "root": "QuillBlotFormatter"
         }
     }
 }
