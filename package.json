@@ -13,7 +13,7 @@
     "peerDependencies": {
         "quill": "1.3.7"
     },
-    "description": "Common patterns, functions, etc... used when building react applications",
+    "description": "A collection of custom Quill.js modules, formats, and other utilities.",
     "devDependencies": {
         "@testing-library/jest-dom": "5.5.0",
         "@testing-library/react": "10.0.4",
@@ -30,6 +30,7 @@
         "jest": "25.5.4",
         "jest-extended": "0.11.5",
         "prettier": "1.19.1",
+        "quill": "1.3.7",
         "rimraf": "2.6.2",
         "rosie": "2.0.1",
         "ts-jest": "25.5.1",
@@ -53,7 +54,8 @@
     "keywords": [
         "JavaScript",
         "Node",
-        "React"
+        "Quill",
+        "TypeScript"
     ],
     "license": "ISC",
     "main": "dist/index",
@@ -63,7 +65,7 @@
         "url": "git+https://github.com/AndcultureCode/AndcultureCode.JavaScript.Quill.git"
     },
     "scripts": {
-        "build": "tsc --pretty && webpack && npm run validate-peer-dependencies",
+        "build": "tsc --pretty && webpack",
         "clean": "rimraf dist && rimraf coverage",
         "configure:git": "echo Ensuring git hooksPath is set to .githooks directory && git config core.hooksPath .githooks && chmod +x .githooks/*",
         "coverage": "jest ./src --coverage",
@@ -75,11 +77,10 @@
         "prepublishOnly": "npm run build",
         "test": "jest ./src",
         "test-cypress": "cypress run",
-        "validate-peer-dependencies": "node validate-peer-dependencies.js",
         "watch": "npm run build -- --watch",
         "watch:coverage": "jest ./src --coverage --watch",
         "watch:test": "jest ./src --watch"
     },
     "types": "dist/index",
-    "version": "0.3.5"
+    "version": "0.0.1"
 }

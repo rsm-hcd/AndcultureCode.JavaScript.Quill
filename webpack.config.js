@@ -12,6 +12,9 @@ module.exports = {
             },
         ],
     },
+    externals: {
+        quill: "quill",
+    },
     output: {
         path: path.resolve(__dirname, "dist-global"),
         filename: "index.js",
