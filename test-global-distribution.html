@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Linking Required Peer JavaScript Dependencies</title>
+        <link
+            href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+            rel="stylesheet"
+        />
+    </head>
+
+    <style>
+        #app-container {
+            background-color: white;
+            height: 90vh;
+        }
+
+        img {
+            display: block;
+        }
+
+        img[data-align="left"] {
+            margin-right: auto;
+        }
+
+        img[data-align="center"] {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        img[data-align="right"] {
+            margin-left: auto;
+        }
+    </style>
+
+    <body>
+        <!--- Must reference peer dependencies here first since these are not included in wrapped global package -->
+        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+        <script src="https://unpkg.com/quill-blot-formatter@1.0.5/dist/quill-blot-formatter.min.js"></script>
+
+        <div id="app-container">
+            <div id="quill-editor-container"></div>
+        </div>
+
+        <!-- Reference the most recently built global distribution package -->
+        <script src="./dist-global/index.js"></script>
+        <script type="text/javascript">
+            Quill.register(
+                AndcultureCodeQuill.QuillToolbarAccessibilityModule.modulePath,
+                AndcultureCodeQuill.QuillToolbarAccessibilityModule
+            );
+            Quill.register("modules/blotFormatter", QuillBlotFormatter.default);
+            Quill.register("formats/image", AndcultureCodeQuill.ResizableImage);
+            Quill.register("formats/link", AndcultureCodeQuill.AbsoluteLink);
+            var editor = new Quill("#quill-editor-container", {
+                modules: {
+                    toolbar: {
+                        container: [
+                            [
+                                "bold",
+                                "italic",
+                                "underline",
+                                "strike",
+                                "blockquote",
+                            ],
+                            [{ align: [] }],
+                            [{ header: [1, 2, 3] }],
+                            [{ list: "bullet" }, { list: "ordered" }],
+                            ["link", "image"],
+                        ],
+                    },
+                    // the options item just has to exist for the module to run
+                    toolbarAccessibility: {},
+                    blotFormatter: {
+                        align: {
+                            aligner: {
+                                // we're applying alignment styles ourselves
+                                // based on the data-align="left/right/center"
+                                applyStyle: false,
+                            },
+                        },
+                        specs: [AndcultureCodeQuill.CustomImageSpec],
+                    },
+                },
+                theme: "snow",
+            });
+        </script>
+    </body>
+</html>
