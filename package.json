@@ -7,13 +7,8 @@
     "bugs": {
         "url": "https://github.com/AndcultureCode/AndcultureCode.JavaScript.Quill/issues"
     },
-    "dependencies": {
-        "quill-blot-formatter": "1.0.5"
-    },
-    "peerDependencies": {
-        "quill": "1.3.7"
-    },
-    "description": "Common patterns, functions, etc... used when building react applications",
+    "description": "A collection of custom Quill.js modules, formats, and other utilities.",
+    "dependencies": {},
     "devDependencies": {
         "@testing-library/jest-dom": "5.5.0",
         "@testing-library/react": "10.0.4",
@@ -30,6 +25,8 @@
         "jest": "25.5.4",
         "jest-extended": "0.11.5",
         "prettier": "1.19.1",
+        "quill-blot-formatter": "1.0.5",
+        "quill": "1.3.7",
         "rimraf": "2.6.2",
         "rosie": "2.0.1",
         "ts-jest": "25.5.1",
@@ -42,6 +39,10 @@
         "webpack": "4.44.2",
         "webpack-cli": "3.3.12"
     },
+    "peerDependencies": {
+        "quill-blot-formatter": "1.0.5",
+        "quill": "1.3.7"
+    },
     "files": [
         "dist",
         "dist-global"
@@ -53,7 +54,8 @@
     "keywords": [
         "JavaScript",
         "Node",
-        "React"
+        "Quill",
+        "TypeScript"
     ],
     "license": "ISC",
     "main": "dist/index",
@@ -81,5 +83,5 @@
         "watch:test": "jest ./src --watch"
     },
     "types": "dist/index",
-    "version": "0.3.5"
+    "version": "0.0.1"
 }
