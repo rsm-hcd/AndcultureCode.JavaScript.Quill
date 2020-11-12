@@ -39,7 +39,7 @@ You can also reference the global distribution package within a website which gi
 </script>
 ```
 
-**NOTE** - This source code relies on several peer dependencies, most of which are not included in this bundled global distribution. You will likely want to reference these in your website prior to referencing the `andculture-javascript-core` global package. See [test-global-distribution.html](./test-global-distribution.html) for the full list of dependencies. Also note that peer dependencies are only required if your code will be executing code paths that utilize any of those peer dependencies.
+**NOTE** - This source code relies on several peer dependencies, most of which are not included in this bundled global distribution. You will likely want to reference these in your website prior to referencing the `andculture-javascript-quill` global package. See [test-global-distribution.html](./test-global-distribution.html) for the full list of dependencies. Also note that peer dependencies are only required if your code will be executing code paths that utilize any of those peer dependencies.
 
 ## Documentation
 

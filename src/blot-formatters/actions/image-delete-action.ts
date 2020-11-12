@@ -1,7 +1,12 @@
 import BlotFormatter, { Action } from "quill-blot-formatter";
 import { Quill } from "quill";
 
-export class ImageDeleteAction extends Action {
+/**
+ * Custom Blot Formatter action to allow the alt-text input to be backspaced
+ * without deleting the image. If alt-text input is not focused,
+ * delete or backspace key will delete the image.
+ */
+class ImageDeleteAction extends Action {
     private readonly keyDownCallback: (e: KeyboardEvent) => void;
 
     // -------------------------------------------------------------------------------------------------
@@ -19,6 +24,9 @@ export class ImageDeleteAction extends Action {
     // #region Action Overrides
     // -------------------------------------------------------------------------------------------------
 
+    /**
+     * Called when the editor is created. Attach event handlers.
+     */
     public onCreate() {
         document.addEventListener("keydown", this.keyDownCallback, true);
         document.body.addEventListener("keydown", this.keyDownCallback, true);
@@ -34,6 +42,9 @@ export class ImageDeleteAction extends Action {
         );
     }
 
+    /**
+     * Called when the editor is destroyed. Clean up event listeners.
+     */
     public onDestroy() {
         document.removeEventListener("keydown", this.keyDownCallback);
         document.body.removeEventListener("keydown", this.keyDownCallback);
@@ -79,3 +90,5 @@ export class ImageDeleteAction extends Action {
 
     // #endregion Private Methods
 }
+
+export { ImageDeleteAction };

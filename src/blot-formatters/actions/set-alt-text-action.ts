@@ -1,7 +1,7 @@
 import BlotFormatter, { Action } from "quill-blot-formatter";
 import { StringUtils } from "andculturecode-javascript-core";
 
-export class SetAltTextAction extends Action {
+class SetAltTextAction extends Action {
     private readonly applyCallback: (e: Event) => void;
     private readonly containerEl: HTMLElement;
     private readonly inputEl: HTMLInputElement;
@@ -105,3 +105,5 @@ export class SetAltTextAction extends Action {
 
     // #endregion Private Methods
 }
+
+export { SetAltTextAction };

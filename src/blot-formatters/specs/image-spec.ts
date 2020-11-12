@@ -12,9 +12,9 @@ import { SetAltTextAction } from "../actions/set-alt-text-action";
  * repositioning the image resize handles
  * when the editor scrolls.
  */
-export class ImageSpec extends ImageBlotSpec {
+class ImageSpec extends ImageBlotSpec {
     // Override
-    getActions(): Array<typeof Action> {
+    public getActions(): Array<typeof Action> {
         return [
             AlignAction,
             ImageDeleteAction,
@@ -24,7 +24,7 @@ export class ImageSpec extends ImageBlotSpec {
     }
 
     // Override
-    init() {
+    public init() {
         this.formatter.quill.root.addEventListener("click", this.onClick);
 
         // handling scroll event
@@ -45,3 +45,5 @@ export class ImageSpec extends ImageBlotSpec {
         );
     }
 }
+
+export { ImageSpec };

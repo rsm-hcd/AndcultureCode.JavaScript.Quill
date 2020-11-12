@@ -14,7 +14,7 @@ const ATTRIBUTES = ["alt", "height", "width", "class", "data-align"];
  * width and height are set) to be set when Quill is
  * loaded, properly restoring the saved image size.
  */
-export class ResizableImage extends Image {
+class ResizableImage extends Image {
     static create(props: any) {
         const node = super.create();
 
@@ -36,7 +36,7 @@ export class ResizableImage extends Image {
         return node;
     }
 
-    static formats(domNode: HTMLElement) {
+    public static formats(domNode: HTMLElement) {
         return ATTRIBUTES.reduce((formats, attribute) => {
             const copy: any = { ...formats };
 
@@ -77,3 +77,5 @@ export class ResizableImage extends Image {
         super.format(name, value);
     }
 }
+
+export { ResizableImage };

@@ -4,6 +4,7 @@ import { CoreUtils } from "andculturecode-javascript-core";
 import { Quill } from "quill";
 import { StringUtils } from "andculturecode-javascript-core";
 import { QuillModule } from "./quill-module";
+import { FormatNames } from "../constants/format-names";
 
 /**
  * Module to hack accessibility into the toolbar.
@@ -12,7 +13,7 @@ import { QuillModule } from "./quill-module";
  * @see https://github.com/quilljs/quill/issues/1173
  * @see https://github.com/quilljs/quill/issues/2038
  */
-export class QuillToolbarAccessibilityModule extends QuillModule<{}> {
+class QuillToolbarAccessibilityModule extends QuillModule<{}> {
     public static modulePath = "modules/toolbarAccessibility";
 
     constructor(quill: Quill) {
@@ -56,20 +57,15 @@ export class QuillToolbarAccessibilityModule extends QuillModule<{}> {
             return;
         }
 
-        const buttons = toolbar.getElementsByTagName("button");
-        const pickers = toolbar.getElementsByClassName("ql-picker");
+        const [buttons, pickers] = this.getControls(toolbar);
+        this.disableSvgFocusOnIE(toolbar);
+        this.applyButtonAccessibleText(buttons);
+        this.applyPickerAccessibility(pickers);
+    }
 
-        // IE has an issue where, after the button is focused, the next focused element
-        // would be the SVG icon inside the button, instead of the next button
-        if (BrowserUtils.isIE()) {
-            const svgArray = Array.from(
-                toolbar.getElementsByTagName("svg") ?? []
-            );
-            svgArray.forEach((svg: SVGSVGElement) =>
-                svg.setAttribute("focusable", "false")
-            );
-        }
-
+    private applyButtonAccessibleText(
+        buttons: HTMLCollectionOf<HTMLButtonElement>
+    ) {
         for (let i = 0; i < buttons.length; i++) {
             const button = buttons[i];
             const format = button.className?.replace("ql-", "") ?? "";
@@ -78,41 +74,36 @@ export class QuillToolbarAccessibilityModule extends QuillModule<{}> {
             }
 
             // list type buttons (bullet/ordered list)
-            if (format === "list" && button.hasAttribute("value")) {
+            if (format === FormatNames.List && button.hasAttribute("value")) {
                 const listType = button.getAttribute("value");
                 button.setAttribute("aria-label", `Toggle ${listType} list`);
                 continue;
             }
 
-            if (format === "strike") {
+            if (format === FormatNames.Strike) {
                 button.setAttribute("aria-label", "Toggle strikethrough text");
                 continue;
             }
 
-            if (format === "link") {
+            if (format === FormatNames.Link) {
                 button.setAttribute("aria-label", "Insert link");
                 continue;
             }
 
-            if (format === "image") {
+            if (format === FormatNames.Image) {
                 button.setAttribute("aria-label", "Insert image");
                 continue;
             }
 
             button.setAttribute("aria-label", `Toggle ${format} text`);
         }
+    }
 
+    private applyPickerAccessibility(pickers: HTMLCollectionOf<Element>) {
         for (let i = 0; i < pickers.length; i++) {
             const picker = pickers[i];
             const labelEl = picker.getElementsByClassName("ql-picker-label")[0];
-            const dropdownLabel = Array.from(picker.classList)
-                .filter(
-                    (className: string) =>
-                        className !== "ql-picker" &&
-                        className !== "ql-expanded" &&
-                        className.startsWith("ql-")
-                )[0]
-                ?.replace("ql-", "");
+            const dropdownLabel = this.getDropdownLabel(picker);
 
             if (dropdownLabel === "header") {
                 labelEl.setAttribute("aria-label", "Header style");
@@ -126,13 +117,7 @@ export class QuillToolbarAccessibilityModule extends QuillModule<{}> {
             labelEl.setAttribute("aria-haspopup", "true");
             labelEl.setAttribute("tabindex", "0");
 
-            const optionsContainer = picker.getElementsByClassName(
-                "ql-picker-options"
-            )[0];
-            const options = optionsContainer.getElementsByClassName(
-                "ql-picker-item"
-            );
-
+            const options = this.getOptionsElements(picker);
             for (let j = 0; j < options.length; j++) {
                 const option = options[j];
                 let value = option.getAttribute("data-value");
@@ -150,4 +135,53 @@ export class QuillToolbarAccessibilityModule extends QuillModule<{}> {
             }
         }
     }
+
+    private getOptionsElements(picker: Element): HTMLCollectionOf<Element> {
+        const optionsContainer = picker.getElementsByClassName(
+            "ql-picker-options"
+        )[0];
+
+        if (optionsContainer == null) {
+            return ([] as unknown) as HTMLCollectionOf<Element>;
+        }
+
+        return optionsContainer.getElementsByClassName("ql-picker-item");
+    }
+
+    private getDropdownLabel(picker: Element): string | undefined {
+        return Array.from(picker.classList)
+            .filter(
+                (className: string) =>
+                    className !== "ql-picker" &&
+                    className !== "ql-expanded" &&
+                    className.startsWith("ql-")
+            )[0]
+            ?.replace("ql-", "");
+    }
+
+    /**
+     * IE has an issue where, after the button is focused, the next focused element
+     * would be the SVG icon inside the button, instead of the next button
+     */
+    private disableSvgFocusOnIE(toolbar: Element) {
+        if (BrowserUtils.isIE()) {
+            const svgArray = Array.from(
+                toolbar.getElementsByTagName("svg") ?? []
+            );
+            svgArray.forEach((svg: SVGSVGElement) =>
+                svg.setAttribute("focusable", "false")
+            );
+        }
+    }
+
+    private getControls(
+        container: Element
+    ): [HTMLCollectionOf<HTMLButtonElement>, HTMLCollectionOf<Element>] {
+        return [
+            container.getElementsByTagName("button"),
+            container.getElementsByClassName("ql-picker"),
+        ];
+    }
 }
+
+export { QuillToolbarAccessibilityModule };

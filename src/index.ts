@@ -1,14 +1,20 @@
 // -----------------------------------------------------------------------------------------
-// #region Blot Formatter
+// #region Blot Formatter Actions
 // -----------------------------------------------------------------------------------------
 
 export { ImageDeleteAction } from "./blot-formatters/actions/image-delete-action";
 export { ImageResizeAction } from "./blot-formatters/actions/image-resize-action";
 export { SetAltTextAction } from "./blot-formatters/actions/set-alt-text-action";
 
+// #endregion Blot Formatter Actions
+
+// -----------------------------------------------------------------------------------------
+// #region Blot Formatter Specs
+// -----------------------------------------------------------------------------------------
+
 export { ImageSpec } from "./blot-formatters/specs/image-spec";
 
-// #endregion Blot Formatter
+// #endregion Blot Formatter Specs
 
 // -----------------------------------------------------------------------------------------
 // #region Formats
