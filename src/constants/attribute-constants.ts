@@ -1,4 +1,10 @@
 /**
+ * An array of all the attributes we're allowing
+ * mapping onto HTML <img> tags in the Quill editor.
+ */
+const ImageHtmlAttributes = ["alt", "class", "data-align", "height", "width"];
+
+/**
  * An array of all the vendor-prefixed user-select attributes
  */
 const UserSelectAttributes = [
@@ -10,5 +16,6 @@ const UserSelectAttributes = [
 ];
 
 export const AttributeConstants = {
+    ImageHtmlAttributes,
     UserSelectAttributes,
 };

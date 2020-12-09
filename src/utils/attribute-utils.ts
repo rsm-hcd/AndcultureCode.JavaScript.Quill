@@ -1,5 +1,9 @@
 import { AttributeConstants } from "../constants/attribute-constants";
 
+// -----------------------------------------------------------------------------------------
+// #region Methods
+// -----------------------------------------------------------------------------------------
+
 const toggleUserSelect = (enabled: boolean) => {
     if (enabled) {
         AttributeConstants.UserSelectAttributes.forEach((attr: string) =>
@@ -19,6 +23,14 @@ const toggleUserSelect = (enabled: boolean) => {
     document.onselectionchange = () => false;
 };
 
+// #endregion Methods
+
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
+
 export const AttributeUtils = {
     toggleUserSelect,
 };
+
+// #endregion Exports

@@ -1,14 +1,12 @@
-enum FormatNames {
-    Image = "image",
-    Link = "link",
-    List = "list",
-    Strike = "strike",
+enum QuillEvents {
+    EditorChange = "editor-change",
+    SelectionChange = "selection-change",
 }
 
 // -----------------------------------------------------------------------------------------
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { FormatNames };
+export { QuillEvents };
 
 // #endregion Exports

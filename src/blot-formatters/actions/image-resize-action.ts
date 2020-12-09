@@ -57,4 +57,10 @@ class ImageResizeAction extends ResizeAction {
     // #endregion Public Properties
 }
 
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
+
 export { ImageResizeAction };
+
+// #endregion Exports

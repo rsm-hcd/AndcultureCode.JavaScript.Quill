@@ -29,7 +29,7 @@ export { ResizableImage } from "./formats/resizable-image";
 // #region Modules
 // -----------------------------------------------------------------------------------------
 
-export { QuillToolbarAccessibilityModule } from "./modules/quill-toolbar-accessibility-module";
+export { QuillDisableSvgFocus } from "./modules/quill-disable-svg-focus-module";
 
 export { QuillModule } from "./modules/quill-module";
 

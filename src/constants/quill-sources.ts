@@ -1,14 +1,12 @@
-enum FormatNames {
-    Image = "image",
-    Link = "link",
-    List = "list",
-    Strike = "strike",
+enum QuillSources {
+    Api = "api",
+    User = "user",
 }
 
 // -----------------------------------------------------------------------------------------
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { FormatNames };
+export { QuillSources };
 
 // #endregion Exports

@@ -1,6 +1,6 @@
 # AndcultureCode.JavaScript.Quill
 
-[![Build Status](https://travis-ci.org/AndcultureCode/AndcultureCode.JavaScript.Quill.svg?branch=master)](https://travis-ci.org/AndcultureCode/AndcultureCode.JavaScript.Quill)
+[![Build Status](https://travis-ci.org/AndcultureCode/AndcultureCode.JavaScript.Quill.svg?branch=main)](https://travis-ci.org/AndcultureCode/AndcultureCode.JavaScript.Quill)
 
 A collection of custom Quill.js modules, formats, and other utilities.
 

@@ -2,9 +2,15 @@ import BlotFormatter, { Action } from "quill-blot-formatter";
 import { StringUtils } from "andculturecode-javascript-core";
 
 class SetAltTextAction extends Action {
+    // -----------------------------------------------------------------------------------------
+    // #region Private Properties
+    // -----------------------------------------------------------------------------------------
+
     private readonly applyCallback: (e: Event) => void;
     private readonly containerEl: HTMLElement;
     private readonly inputEl: HTMLInputElement;
+
+    // #endregion Private Properties
 
     // -------------------------------------------------------------------------------------------------
     // #region Constructor
@@ -45,37 +51,6 @@ class SetAltTextAction extends Action {
     // #region Private Methods
     // -------------------------------------------------------------------------------------------------
 
-    private getImgAltText(): string | undefined {
-        const img = this.formatter.currentSpec?.getTargetElement() as HTMLImageElement;
-        if (img == null) {
-            return undefined;
-        }
-
-        return img.alt;
-    }
-
-    private setImgAltText(altText: string) {
-        const img = this.formatter.currentSpec?.getTargetElement() as HTMLImageElement;
-        if (img == null) {
-            return;
-        }
-
-        img.alt = altText;
-    }
-
-    private setInputValue(inputValue?: string) {
-        if (StringUtils.isEmpty(inputValue)) {
-            return;
-        }
-
-        this.inputEl.value = inputValue!;
-    }
-
-    private onApply(e: Event) {
-        const input = e.target as HTMLInputElement;
-        this.setImgAltText(input.value);
-    }
-
     private static buildAltTextInput(inputValue?: string) {
         const container = document.createElement("div");
         container.style.display = "flex";
@@ -103,7 +78,44 @@ class SetAltTextAction extends Action {
         return { container, input };
     }
 
+    private getImgAltText(): string | undefined {
+        const img = this.formatter.currentSpec?.getTargetElement() as HTMLImageElement;
+        if (img == null) {
+            return undefined;
+        }
+
+        return img.alt;
+    }
+
+    private onApply(e: Event) {
+        const input = e.target as HTMLInputElement;
+        this.setImgAltText(input.value);
+    }
+
+    private setImgAltText(altText: string) {
+        const img = this.formatter.currentSpec?.getTargetElement() as HTMLImageElement;
+        if (img == null) {
+            return;
+        }
+
+        img.alt = altText;
+    }
+
+    private setInputValue(inputValue?: string) {
+        if (StringUtils.isEmpty(inputValue)) {
+            return;
+        }
+
+        this.inputEl.value = inputValue!;
+    }
+
     // #endregion Private Methods
 }
 
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
+
 export { SetAltTextAction };
+
+// #endregion Exports

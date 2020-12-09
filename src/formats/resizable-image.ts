@@ -1,8 +1,7 @@
 import { Quill } from "quill";
+import { AttributeConstants } from "../constants/attribute-constants";
 
 const Image = Quill.import("formats/image");
-
-const ATTRIBUTES = ["alt", "height", "width", "class", "data-align"];
 
 /**
  * Without this custom Quill format,
@@ -15,11 +14,11 @@ const ATTRIBUTES = ["alt", "height", "width", "class", "data-align"];
  * loaded, properly restoring the saved image size.
  */
 class ResizableImage extends Image {
-    static create(props: any) {
+    public static create(props: any) {
         const node = super.create();
 
         node.setAttribute("src", props.src);
-        ATTRIBUTES.forEach((attr) => {
+        AttributeConstants.ImageHtmlAttributes.forEach((attr) => {
             if (
                 props[attr] != null &&
                 props[attr] !== "undefined" &&
@@ -48,7 +47,7 @@ class ResizableImage extends Image {
         }, {});
     }
 
-    static value(node: HTMLElement) {
+    public static value(node: HTMLElement) {
         return ATTRIBUTES.reduce(
             (attrs, attribute) => {
                 const copy: any = { ...attrs };
@@ -63,7 +62,7 @@ class ResizableImage extends Image {
         );
     }
 
-    format(name: string, value: any) {
+    public format(name: string, value: any) {
         if (ATTRIBUTES.indexOf(name) > -1) {
             if (value) {
                 this.domNode.setAttribute(name, value);

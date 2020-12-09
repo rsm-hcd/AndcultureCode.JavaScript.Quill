@@ -91,4 +91,10 @@ class ImageDeleteAction extends Action {
     // #endregion Private Methods
 }
 
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
+
 export { ImageDeleteAction };
+
+// #endregion Exports
